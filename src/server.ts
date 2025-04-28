@@ -5,9 +5,10 @@ const PORT = 3333
 
 // inicializa o express e armazena em app todas as suas funcionalidades
 const app = express()
-app.use(express.json())
 
-app.use(myMiddleware)
+app.use(express.json())
+// middleware global (aplica para todas as rotas abaixo)
+// app.use(myMiddleware)
 
 app.get("/products", (request, response) => {
   // http://localhost:3333/products/?page=1&limit=10
@@ -16,7 +17,9 @@ app.get("/products", (request, response) => {
   response.send(`Página ${page} de ${limit}`)
 })
 
-app.post("/products", (request, response) => {
+
+// Middleware local em uma rota específica
+app.post("/products", myMiddleware, (request, response) => {
   const {name, price} = request.body
 
   // response.send(`Produto ${name} custa ${price}`)
