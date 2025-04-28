@@ -5,7 +5,8 @@ export function myMiddleware(
   response: Response, 
   next: NextFunction
 ){
-    console.log("Passou pelo middleware!")
+  request.user_id = "123456"
+  console.log("Passou pelo middleware!")
 
-    return next()
+  return next()
 }
