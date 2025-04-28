@@ -1,10 +1,13 @@
 import express from "express"
+import { myMiddleware } from "./middlewares/my-middleware"
 
 const PORT = 3333
 
 // inicializa o express e armazena em app todas as suas funcionalidades
 const app = express()
 app.use(express.json())
+
+app.use(myMiddleware)
 
 app.get("/products", (request, response) => {
   // http://localhost:3333/products/?page=1&limit=10
